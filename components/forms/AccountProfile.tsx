@@ -19,14 +19,14 @@ import Image from "next/image";
 import { ChangeEvent, useState } from "react";
 import { isBase64Image } from "@/lib/utils";
 import { useUploadThing } from "@/lib/uploadThing";
-import { updateUsers } from "@/lib/actions/user.actions";
+import { updateUser } from "@/lib/actions/user.actions";
 import { usePathname, useRouter } from "next/navigation";
 interface Props {
   user: {
     id: string;
     objectId: string;
     username: string;
-    email: string;
+
     name: string;
     bio: string;
     image: string;
@@ -43,10 +43,10 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
   const form = useForm({
     resolver: zodResolver(userValidation),
     defaultValues: {
-      profile_photo: user?.image || "",
-      name: user?.name || "",
-      username: user?.username || "",
-      bio: user?.bio || "",
+      profile_photo: user?.image || " ",
+      name: user?.name || " ",
+      username: user?.username || " ",
+      bio: user?.bio || " ",
     },
   });
 
@@ -83,7 +83,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
         values.profile_photo = imgRes[0].fileUrl;
       }
     }
-    await updateUsers({
+    await updateUser({
       userId: user.id,
       username: values.username,
       name: values.name,

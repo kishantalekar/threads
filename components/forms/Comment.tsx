@@ -31,7 +31,7 @@ const Comment = ({ threadId, currentUserImg, currentUserId }: Props) => {
   const form = useForm({
     resolver: zodResolver(CommentValidation),
     defaultValues: {
-      thread: "",
+      thread: " ",
     },
   });
   const onSubmit = async (values: z.infer<typeof CommentValidation>) => {
